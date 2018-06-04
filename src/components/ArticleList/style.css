@@ -1,0 +1,7 @@
+.ArticleList {
+	margin: 0;
+	padding: 0;
+}
+.ArticleList__item {
+	list-style-type: none;
+}
