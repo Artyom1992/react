@@ -4,8 +4,18 @@ import articles from '../fixures'
 import 'bootstrap/dist/css/bootstrap.css'
 
 class App extends Component {
-	state = {
-		reverted: false
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			reverted: false
+		}
+
+		this.revert = () => {
+			this.setState({
+				reverted: !this.state.reverted
+			})
+		}
 	}
 
 	render() {
@@ -17,14 +27,10 @@ class App extends Component {
 					<button className="btn" onClick={this.revert}>Revert</button>
 					</h1>
 				</div>
-				<ArticleList articles={this.state.reverted ? articles.reverse() : articles} />
+				<ArticleList articles={this.state.reverted ? articles.slice().reverse() : articles} />
 			</div>
 		)
 	}
-
-	revert = () => this.setState({
-		reverted: !this.state.reverted
-	})
 }
 
 export default App;

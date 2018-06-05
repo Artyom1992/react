@@ -1,19 +1,29 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Article from '../Article'
 import './style.css'
 
-function ArticleList({articles}) {
-	const articleElements = articles.map((article, index) =>
-		<li className="ArticleList__item" key = {article.id}>
-			<Article article = {article} defaultOpen = {index === 0} />
-		</li>
-	)
+class ArticleList extends Component {
+	constructor(props) {
+		super(props);
 
-	return (
-		<ul className="ArticleList">
-			{articleElements}
-		</ul>
-	)
+		this.state = {
+			openArticleId: null
+		}
+	}
+
+	render() {
+		const articleElements = this.props.articles.map((article, index) =>
+			<li className="ArticleList__item" key = {article.id}>
+				<Article article = {article} isOpen = {this.state.openArticleId === article.id} />
+			</li>
+		)
+
+		return (
+			<ul className="ArticleList">
+				{articleElements}
+			</ul>
+		)
+	}
 }
 
 export default ArticleList;
