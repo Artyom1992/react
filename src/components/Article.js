@@ -5,47 +5,36 @@ class Article extends Component {
 		super(props);
 
 		this.state = {
-			isOpen: props.defaultOpen
 		}
-
-		this.handleClick = () => {
-			this.setState({
-				isOpen: !this.state.isOpen
-			})
-		}
-	}
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return this.state.isOpen !== nextState.isOpen
 	}
 
 	componentWillMount() {
 		console.log('--- WillMount');
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.defaultOpen !== this.props.defaultOpen) {
-			this.setState({
-				isOpen: nextProps.defaultOpen
-			})
-		}
-	}
+	// componentWillReceiveProps(nextProps) {
+	// 	if (nextProps.defaultOpen !== this.props.defaultOpen) {
+	// 		this.setState({
+	// 			isOpen: nextProps.defaultOpen
+	// 		})
+	// 	}
+	// }
 
 	componentWillUpdate() {
 		console.log('--- wiilUpdate');
 	}
 
 	render() {
-		const {article} = this.props;
-		const body = this.state.isOpen && <section className="card-text">{article.text}</section> ;
+		const {article, isOpen, onButtonClick} = this.props;
+		const body = isOpen && <section className="card-text">{article.text}</section> ;
 
 		return (
 			<div className="card" style={{width: '70%'}}>
 				<div className="card-header">
 					<h2>
 						{article.title}
-						<button className="btn btn-primary btn-lg float-right" onClick={this.handleClick}>
-							{this.state.isOpen ? 'Close' : 'Open'}
+						<button className="btn btn-primary btn-lg float-right" onClick={onButtonClick}>
+							{isOpen ? 'Close' : 'Open'}
 						</button>
 					</h2>
 				</div>
